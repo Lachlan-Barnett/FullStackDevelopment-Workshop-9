@@ -11,11 +11,3 @@ exports.insertDocuments = function(collection, docArray, callback) {
         callback(result);
     });
 };
-
-module.exports = function(collection) {
-    collection.drop(function() {
-        exports.insertDocuments(collection, docArray, function(result) {
-            console.log('add.js done.');
-        });
-    });
-};
