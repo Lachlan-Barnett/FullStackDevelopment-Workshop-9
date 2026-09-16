@@ -1,7 +1,6 @@
-exports.removeDocument = function(collection, queryJSON, callback) {
-    collection.deleteOne(queryJSON, function(err, result) {
-        console.log("Removed the documents with");
-        console.log(queryJSON);
-        callback(result);
-    });
+exports.removeDocument = async function(collection, queryJSON) {
+    const result = await collection.deleteOne(queryJSON);
+    console.log("Removed the documents with");
+    console.log(queryJSON);
+    return result;
 };

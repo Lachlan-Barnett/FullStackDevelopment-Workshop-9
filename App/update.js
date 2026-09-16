@@ -1,9 +1,8 @@
-exports.updateDocument = function(collection, queryJSON, updateJSON, callback) {
-    collection.updateOne(queryJSON, { $set: updateJSON }, function(err, result) {
-        console.log("for the documents with");
-        console.log(queryJSON);
-        console.log("SET: ");
-        console.log(updateJSON);
-        callback(result);
-    });
+exports.updateDocument = async function(collection, queryJSON, updateJSON) {
+    const result = await collection.updateOne(queryJSON, { $set: updateJSON });
+    console.log("for the documents with");
+    console.log(queryJSON);
+    console.log("SET: ");
+    console.log(updateJSON);
+    return result;
 };

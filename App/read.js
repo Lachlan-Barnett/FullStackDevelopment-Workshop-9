@@ -1,7 +1,6 @@
-exports.findDocuments = function(collection, queryJSON, callback) {
-    collection.find(queryJSON).toArray(function(err, docs) {
-        console.log("Found the following records:");
-        console.log(docs);
-        callback(docs);
-    });
+exports.findDocuments = async function(collection, queryJSON) {
+    const docs = await collection.find(queryJSON).toArray();
+    console.log("Found the following records:");
+    console.log(docs);
+    return docs;
 };

@@ -4,10 +4,11 @@ const docArray = [
     { id: 3, name: '64GB USB', description: '64GB USB flash drive', price: 24.99, units: 15 }
 ];
 
-exports.insertDocuments = function(collection, docArray, callback) {
-    collection.insertMany(docArray, function(err, result) {
-        console.log("Inserted the following documents into the collection:");
-        console.log(docArray);
-        callback(result);
-    });
+exports.docArray = docArray;
+
+exports.insertDocuments = async function(collection, docArray) {
+    const result = await collection.insertMany(docArray);
+    console.log("Inserted the following documents into the collection:");
+    console.log(docArray);
+    return result;
 };
