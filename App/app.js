@@ -21,9 +21,7 @@ async function main() {
     const db = client.db(dbName);
     const collection = db.collection('products');
 
-    await collection.drop().catch(() => {
-        // ignore error if the collection doesn't exist yet
-    });
+    await collection.drop().catch(() => {});
 
     await add.insertDocuments(collection, add.docArray);
     await update.updateDocument(collection, queryJSONup, updateJSON);
