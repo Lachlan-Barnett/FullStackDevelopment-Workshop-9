@@ -4,9 +4,14 @@ const cors = require('cors');
 const { MongoClient } = require('mongodb');
 
 const app = express();
+app.set('etag', false);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
 
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { serverSelectionTimeoutMS: 5000 });
