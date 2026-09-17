@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProddataService } from '../services/proddata';
 import { Product } from '../models/product.model';
 
 @Component({
-    imports: [FormsModule],
+    imports: [FormsModule, RouterLink],
     selector: 'app-update-product',
     styleUrl: './update-product.css',
     templateUrl: './update-product.html',
@@ -19,6 +19,9 @@ export class UpdateProduct implements OnInit {
         const stored = localStorage.getItem('product');
         if (stored) {
             this.product = JSON.parse(stored);
+        } else {
+            // reached /update directly without picking a product from the list first
+            this.router.navigate(['']);
         }
     }
 

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProddataService } from '../services/proddata';
 import { Product } from '../models/product.model';
 
 @Component({
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, RouterLink],
     selector: 'app-add-product',
     styleUrl: './add-product.css',
     templateUrl: './add-product.html',
@@ -30,11 +30,17 @@ export class AddProduct {
             units: this.productunits!
         };
 
-        this.proddata.add(newProduct).subscribe(data => {
-            if (data.ok) {
-                this.router.navigate(['']);
-            } else {
-                this.message = data.err;
+        this.proddata.add(newProduct).subscribe({
+            next: data => {
+                if (data.ok) {
+                    this.router.navigate(['']);
+                } else {
+                    this.message = data.err;
+                }
+            },
+            error: err => {
+                console.error('Add product failed:', err);
+                this.message = 'Request failed: ' + (err.status === 0 ? 'cannot reach server (is it running? CORS blocked?)' : err.message);
             }
         });
     }

@@ -1,8 +1,9 @@
-<nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">Widget Store</a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a routerLink="/" class="nav-link" routerLinkActive="active">Products</a>
+                <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Products</a>
             </li>
             <li class="nav-item">
                 <a routerLink="/add" class="nav-link" routerLinkActive="active">Add Product</a>
@@ -11,6 +12,6 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container py-4">
     <router-outlet></router-outlet>
 </div>
