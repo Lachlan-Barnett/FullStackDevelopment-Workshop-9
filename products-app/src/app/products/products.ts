@@ -16,12 +16,19 @@ export class Products implements OnInit {
     constructor(private proddata: ProddataService, private router: Router) {}
 
     ngOnInit(): void {
+        console.log('Products ngOnInit fired');
         this.getProducts();
     }
 
     getProducts(): void {
-        this.proddata.getlist().subscribe(data => {
-            this.products = data;
+        this.proddata.getlist().subscribe({
+            next: data => {
+                console.log('getlist response:', data);
+                this.products = data;
+            },
+            error: err => {
+                console.error('getlist FAILED:', err);
+            }
         });
     }
 
